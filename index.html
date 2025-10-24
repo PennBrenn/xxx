@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PennHub</title>
+  <link rel="icon" type="image/png" href="pennhub.png">
+  <meta name="description" content="The mostist sillist silly site of all" />
   <style>
     :root {
       --accent: #ff8800;
@@ -84,8 +86,8 @@
   <footer>© 2025 PennHub</footer>
 
   <script>
-    const CLOUD_NAME = "YOUR_CLOUD_NAME";
-    const UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
+    const CLOUD_NAME = "dmxcrna8k";
+    const UPLOAD_PRESET = "ml_default";
 
     const uploadBtn = document.getElementById("uploadBtn");
     const fileInput = document.getElementById("fileInput");
@@ -101,7 +103,7 @@
       formData.append("file", file);
       formData.append("upload_preset", UPLOAD_PRESET);
 
-      const res = await fetch(`https://api.cloudinary.com/v1_1/$F7LPUJj2pLeB_ZrprF86Ve_B-qw/image/upload`, {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/$dmxcrna8k/image/upload`, {
         method: "POST",
         body: formData,
       });

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PennShare</title>
+  <title>PennHub</title>
   <style>
     :root {
       --accent: #ff8800;
@@ -73,7 +73,7 @@
   </style>
 </head>
 <body>
-  <h1>PennShare</h1>
+  <h1>PennHub</h1>
   <p>Upload and share your photos — free & instant.</p>
 
   <input type="file" id="fileInput" accept="image/*" />
@@ -81,7 +81,7 @@
 
   <div id="gallery"></div>
 
-  <footer>© 2025 PennShare</footer>
+  <footer>© 2025 PennHub</footer>
 
   <script>
     const CLOUD_NAME = "YOUR_CLOUD_NAME";
@@ -101,7 +101,7 @@
       formData.append("file", file);
       formData.append("upload_preset", UPLOAD_PRESET);
 
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/$F7LPUJj2pLeB_ZrprF86Ve_B-qw/image/upload`, {
         method: "POST",
         body: formData,
       });

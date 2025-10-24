@@ -1,1 +1,121 @@
-<p>who is gorn and why are we paing him?</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PennShare</title>
+  <style>
+    :root {
+      --accent: #ff8800;
+      --bg: #111;
+      --fg: #ddd;
+      --card: #1a1a1a;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: var(--accent);
+    }
+
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 2rem;
+    }
+
+    .photo {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s;
+    }
+
+    .photo:hover { transform: scale(1.03); }
+    img { width: 100%; height: auto; display: block; }
+
+    button {
+      background: var(--accent);
+      border: none;
+      color: black;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    input[type="file"] { display: none; }
+
+    footer {
+      margin-top: auto;
+      opacity: 0.6;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>PennShare</h1>
+  <p>Upload and share your photos — free & instant.</p>
+
+  <input type="file" id="fileInput" accept="image/*" />
+  <button id="uploadBtn">Upload Image</button>
+
+  <div id="gallery"></div>
+
+  <footer>© 2025 PennShare</footer>
+
+  <script>
+    const CLOUD_NAME = "YOUR_CLOUD_NAME";
+    const UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
+
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("fileInput");
+    const gallery = document.getElementById("gallery");
+
+    uploadBtn.onclick = () => fileInput.click();
+
+    fileInput.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (data.secure_url) addPhoto(data.secure_url);
+    };
+
+    function addPhoto(url) {
+      const div = document.createElement("div");
+      div.className = "photo";
+      div.innerHTML = `<img src="${url}" alt="Uploaded image" />`;
+      gallery.prepend(div);
+    }
+  </script>
+</body>
+</html>
